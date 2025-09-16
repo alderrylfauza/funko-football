@@ -1,24 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{{ app_name }}</title>
+    <meta charset="UTF-8">
+    <title>{{ app_name }}</title>
 </head>
 <body>
-  <h1>{{ app_name }}</h1>
-  <h3>Class: {{ class_name }}</h3>
+    <h1>{{ app_name }}</h1>
+    <p>Class: {{ class_name }}</p>
 
-  <h2>Products</h2>
-  {% for product in products %}
-    <h4>{{ product.name }}</h4>
-    <p>Price: {{ product.price }}</p>
-    <p>Description: {{ product.description }}</p>
-    <p>Thumbnail: <a href="{{ product.thumbnail }}">{{ product.thumbnail }}</a></p>
-    <p>Category: {{ product.category }}</p>
-    <p>Stock: {{ product.stock }}</p>
-    <p>Featured: {{ product.is_featured }}</p>
-    <hr>
-  {% empty %}
-    <p>No products available.</p>
-  {% endfor %}
+    <h2>Available Products</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <h3>{{ product.name }}</h3>
+                <p><strong>Price:</strong> Rp{{ product.price }}</p>
+                <p><strong>Description:</strong> {{ product.description }}</p>
+                <p><strong>Category:</strong> {{ product.category }}</p>
+                <p><strong>Stock:</strong> {{ product.stock }}</p>
+                <p><strong>Featured:</strong> {{ product.is_featured }}</p>
+                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="150">
+            </li>
+        {% empty %}
+            <li>No products available.</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
