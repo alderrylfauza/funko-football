@@ -33,7 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "alderryl-juan-funkofootball.pbp.cs.ui.ac.id"]
 CSRF_TRUSTED_ORIGINS = [
-    "https://alderryl-juan-funkofootball.pbp.cs.ui.ac.id/"
+    "https://alderryl-juan-funkofootball.pbp.cs.ui.ac.id"
 ]
 
 
