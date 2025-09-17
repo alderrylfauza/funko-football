@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <title>Add New Product</title>
+</head>
+<body>
+    <h1>Add New Product</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label for="id_name">Name:</label>
+            <input type="text" name="name" id="id_name" required>
+        </p>
+        <p>
+            <label for="id_price">Price:</label>
+            <input type="number" name="price" id="id_price" required>
+        </p>
+        <p>
+            <label for="id_description">Description:</label>
+            <textarea name="description" id="id_description" required></textarea>
+        </p>
+        <p>
+            <label for="id_thumbnail">Thumbnail URL:</label>
+            <input type="url" name="thumbnail" id="id_thumbnail" required>
+        </p>
+        <p>
+            <label for="id_category">Category:</label>
+            <input type="text" name="category" id="id_category" required>
+        </p>
+        <p>
+            <label for="id_stock">Stock:</label>
+            <input type="number" name="stock" id="id_stock" min="0" required>
+        </p>
+        <p>
+            <label for="id_is_featured">Is Featured:</label>
+            <input type="checkbox" name="is_featured" id="id_is_featured">
+        </p>
+        <input type="submit" value="Save Product">
+    </form>
+    
+    <a href="{% url 'main:show_main' %}">Back to Main</a>
+</body>
+</html>

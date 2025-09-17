@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>{{ app_name }}</title>
 </head>
 <body>
     <h1>{{ app_name }}</h1>
+    <p>Name: {{ username }}</p>
     <p>Class: {{ class_name }}</p>
+    
+    <a href="{% url 'main:create_product' %}">Add New Product</a>
 
     <h2>Available Products</h2>
     <ul>
@@ -19,6 +20,8 @@
                 <p><strong>Stock:</strong> {{ product.stock }}</p>
                 <p><strong>Featured:</strong> {{ product.is_featured }}</p>
                 <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="150">
+                <br>
+                <a href="{% url 'main:show_product' product.id %}">Detail</a>
             </li>
         {% empty %}
             <li>No products available.</li>
