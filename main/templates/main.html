@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<head>
-    <title>{{ app_name }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}{{ app_name }}{% endblock %}
+
+{% block content %}
     <h1>{{ app_name }}</h1>
     <p>Name: {{ username }}</p>
     <p>Class: {{ class_name }}</p>
@@ -27,5 +27,4 @@
             <li>No products available.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

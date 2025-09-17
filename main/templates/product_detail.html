@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<head>
-    <title>{{ product.name }} - Product Detail</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - Product Detail{% endblock %}
+
+{% block content %}
     <a href="{% url 'main:show_main' %}">Back to Main</a>
     
     <h1>{{ product.name }}</h1>
@@ -12,5 +12,4 @@
     <p><strong>Stock:</strong> {{ product.stock }}</p>
     <p><strong>Featured:</strong> {{ product.is_featured }}</p>
     <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="200">
-</body>
-</html>
+{% endblock %}

@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<head>
-    <title>Add New Product</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Add New Product{% endblock %}
+
+{% block content %}
     <h1>Add New Product</h1>
     
     <form method="post">
@@ -39,5 +39,4 @@
     </form>
     
     <a href="{% url 'main:show_main' %}">Back to Main</a>
-</body>
-</html>
+{% endblock %}
