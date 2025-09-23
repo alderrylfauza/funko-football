@@ -52,3 +52,48 @@ lalu commit ke pws dan ke github dan tugas 3 sudah dianggap selesai
 
 tugas 3 merupakan tugas yang sangat seru, mudah dipahami juga karena tutorial sangat terstruktur dan lengkap, penjelasan tentang Django didalamnya juga komprehensif, dan step-by-step implementation tugas jelas
 
+TUGAS 4
+
+authenticationform adalah form bawaan django untuk melakukan proses login, memiliki field username dan password, ada authenticate() untuk mengecek kredensial; ada juga form.get_user() untuk mengambil user, dan pada umumnya digunakan dengan form bawaan lain seperti login, dan logout.
+kelebihan dari menggunakan authenticationform adalah karena ini bawaan django, maka mekanismenya secure, selain itu, lebih mudah digunakan dibandingkan memulai dari nol
+kekurangan dari menggunakan authenticationform adalah tidak bisa menggunakan email untuk login, dan susah jika ada login khusus (ex: sso) tanpa di-modifikasi
+
+authenticate() (memeriksa kredensial via authentication backends) dan login() (menetapkan user ke session).
+otorisasi lebih untuk mengecek apakah perlu login jika ingin melakukan sesuatu (@login_required)
+
+
+session (server-side) — contoh: DB, cache (Redis), cached_db
+Kelebihan
+Data sensitif disimpan di server (lebih aman).
+Mudah invalidasi (server-side logout atau hapus session).
+Ukuran data tidak dibatasi ketat seperti cookie.
+Kekurangan
+Butuh penyimpanan server (skalabilitas: butuh shared store seperti Redis ketika ada banyak instance).
+
+Cookies (client-side storage)
+Kelebihan
+Stateless server (skala horizontal lebih mudah).
+Cepat, tidak perlu lookup server untuk data kecil.
+Kekurangan
+Rentan terhadap XSS (jika cookie dapat diakses oleh JS) dan manipulasi.
+Sulit untuk melakukan revocation (mencabut akses) kecuali ada mekanisme server-side tambahan
+
+
+Risiko utama:
+XSS (Cross-Site Scripting): attacker dapat baca cookie kalau cookie tidak HttpOnly.
+CSRF (Cross-Site Request Forgery): attacker bisa mengirim request dari domain lain yang menyertakan cookie login.
+Man-in-the-Middle: jika tidak memakai HTTPS, cookie bisa dicuri.
+Cookie tampering: jika tidak signed/encrypted, user bisa memodifikasi isi cookie.
+Django menyediakan / merekomendasikan mitigasi:
+Session server-side (django.contrib.sessions) — aplikasi tidak menyimpan data sensitif di cookie; cookie hanya menyimpan session id.
+CSRF protection via CsrfViewMiddleware + {% csrf_token %} di form; Django mensyaratkan token untuk POST/unsafe methods.
+
+pertama dimulai dengan menambahkan register, login user, logout user kedalam urls, lalu masukkan path untuk register, login dan logout
+lalu menambahkan model baru dalam product class dengan nama user, digunakan sebagai untuk mendapatkan nama user yang sedang dalam web
+lalu, tambahkan otorisasi dalam showmain, showproduct dimana perlu login sebelumnya
+buat register, login dan logout methods dalam views.py
+buat 2 file html baru, satu untuk login dan satu untuk register
+ubah main html agar bisa mengecek artikel siapakah yang kita sedang baca, juga last login dan login logout
+dalam product detail, tambahkan author name, dan apabila tidak ada dibuat anonymous
+commit ke github dan pws
+semua implementasi sudah selesai, lanjut dengan membuat dua user dan 3 dummy info dalam websitenya
