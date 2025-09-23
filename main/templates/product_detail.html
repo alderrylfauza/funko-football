@@ -12,4 +12,11 @@
     <p><strong>Stock:</strong> {{ product.stock }}</p>
     <p><strong>Featured:</strong> {{ product.is_featured }}</p>
     <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="200">
-{% endblock %}
+
+    {% if product.user %}
+        <p>Author: {{ product.user.username }}</p>
+    {% else %}
+        <p>Author: Anonymous</p>
+    {% endif %}
+
+{% endblock content %}
