@@ -97,3 +97,26 @@ ubah main html agar bisa mengecek artikel siapakah yang kita sedang baca, juga l
 dalam product detail, tambahkan author name, dan apabila tidak ada dibuat anonymous
 commit ke github dan pws
 semua implementasi sudah selesai, lanjut dengan membuat dua user dan 3 dummy info dalam websitenya
+
+TUGAS 5
+
+pertama, ada yang namanya !important. ini seperti sebuah perintah mutlak yang tidak bisa diganggu gugat. kalau ada aturan yang ditandai dengan ini, misalnya p { color: blue !important; }, maka aturan ini akan mengalahkan semua aturan lain yang mungkin ada, tidak peduli seberapa spesifik aturan lainnya.
+kedua, ada inline css. ini adalah instruksi yang kita tulis langsung di dalam tag html itu sendiri, lewat atribut style. 
+ketiga, ada id selector. setiap elemen idealnya hanya punya satu id unik, seperti nomor ktp. jadi, kalau kita menargetkan sebuah id, browser menganggap ini perintah yang sangat spesifik karena hanya menunjuk ke satu elemen saja.
+keempat, ada sekelompok selector yang punya kekuatan setara. ini adalah class (.highlight), dan juga pseudo-class karena satu class bisa dipakai oleh banyak elemen, kekuatannya ada di bawah id.
+terakhir, yang paling lemah adalah selektor elemen. ini adalah ketika kita menargetkan semua elemen dengan tag html tertentu, misalnya semua p atau semua h1. karena ini sangat umum dan tidak spesifik, kekuatannya paling rendah.
+kalau ada dua aturan yang tingkat spesifisitasnya sama persis, maka yang akan menang adalah aturan yang ditulis paling bawah atau paling akhir di dalam file css.
+
+cara kita mengakses internet sudah berubah total. dulu, hampir semua orang membuka website dari komputer. sekarang, mayoritas traffic internet datang dari ponsel. bayangkan membuka sebuah website di ponsel tapi tulisannya kecil sekali sampai harus dicubit-cubit untuk zoom, lalu harus geser-geser layar ke kanan dan kiri hanya untuk membaca satu kalimat. pengalaman seperti itu akan membuat pengunjung langsung menutup website kita dan tidak akan pernah kembali lagi.
+desain yang responsif itu soal user experience. ini tentang memberikan kemudahan. di layar kecil, menu navigasi yang tadinya melebar bisa disembunyikan di dalam sebuah ikon "hamburger" (tiga garis) untuk menghemat tempat. layout yang tadinya tiga kolom di desktop bisa diubah menjadi satu kolom vertikal yang enak untuk di-scroll. ini membuat pengguna merasa nyaman dan dihargai.
+
+padding itu adalah ruang kosong antara lukisan (konten) dan bingkainya (border). ini seperti karton putih yang sering ada di sekeliling foto di dalam bingkai. fungsinya untuk memberikan "ruang bernapas" bagi konten di dalamnya. kalau kita punya tombol dengan teks, padding akan membuat teks itu tidak mepet ke pinggiran tombol.
+border adalah bingkainya itu sendiri. ini adalah garis yang terlihat yang mengelilingi konten dan padding. kita bisa atur ketebalannya, warnanya, dan gayanya.
+margin adalah jarak dari bingkai lukisan kita ke bingkai lukisan lain yang ada di dinding. ini adalah ruang kosong di luar elemen. fungsinya untuk memberikan jarak antar elemen, supaya mereka tidak saling menempel dan terlihat berantakan.
+
+flexbox itu paling jago untuk mengatur hal-hal dalam satu dimensi. kita ingin semua link menu (home, add product, login) berjejer rapi secara horizontal. flexbox adalah alat yang cocok untuk itu, alat itu bisa dengan mudah mengatur jarak di antara mereka, atau membuatnya rata kanan, kiri, atau tengah.
+grid memungkinkan kita untuk mengontrol baris dan kolom secara bersamaan. ini sangat bagus untuk merancang layout halaman secara keseluruhan. 
+
+pertama, aku ambil halaman register.html dan login.html yang masih sederhana, lalu aku memikirkan tentang visi desain. kita sepakat untuk tema gelap yang modern, dan akhirnya rombak total kedua halaman itu menggunakan tailwind css. pastikan setiap input field, tombol, dan pesan error terlihat serasi dengan tema premium yang diinginkan, sesuatu yang tutorial lakukan di tahap akhir, tapi aku prioritaskan di awal untuk menetapkan nuansa aplikasi.
+aku mengimplementasikan fungsi edit_product dan delete_product di views.py dan urls.py. tapi, aku terjebak pada error reverse for 'show_product' not found. melalui serangkaian percakapan, aku belajar bersama tentang pentingnya app_name, perbedaan antara id dan pk, dan bagaimana semua bagian (template, url, dan view) harus sinkron. ini adalah pengalaman belajar yang jauh lebih mendalam daripada sekadar mengikuti instruksi.
+memutuskan untuk membuat rebranding total dari "toko funko pop" menjadi "marketplace lifestyle pemain bola" dengan tema gelap yang keren. pemilihan font "inter" dari google fonts, penggunaan warna aksen biru, hingga desain card yang minimalis
