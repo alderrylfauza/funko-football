@@ -1,32 +1,77 @@
 {% extends 'base.html' %}
 
-{% block meta %}
-<title>Login</title>
-{% endblock meta %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="login">
-  <h1>Login</h1>
+<div class="max-w-md mx-auto bg-gray-800 p-8 mt-12 rounded-xl shadow-2xl">
+    <h1 class="text-3xl font-bold text-center text-white mb-8">Sign In</h1>
 
-  <form method="POST" action="">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input class="btn login_btn" type="submit" value="Login" /></td>
-      </tr>
-    </table>
-  </form>
+    <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Menampilkan error yang tidak terkait field tertentu (misal: username/password salah) -->
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <div class="bg-red-500 bg-opacity-20 text-red-300 text-center p-3 rounded-lg text-sm">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} Don't have an account yet?
-  <a href="{% url 'main:register' %}">Register Now</a>
+        <!-- Field Username -->
+        <div>
+            <label for="id_username" class="block mb-2 font-semibold text-gray-300">Username</label>
+            <input 
+                id="id_username" 
+                name="username" 
+                type="text" 
+                required 
+                autofocus
+                class="w-full" 
+                placeholder="Enter your username">
+            <!-- Menampilkan error spesifik untuk field username -->
+            {% for error in form.username.errors %}
+                <p class="text-red-400 text-xs mt-1">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- Field Password -->
+        <div>
+            <label for="id_password" class="block mb-2 font-semibold text-gray-300">Password</label>
+            <input 
+                id="id_password" 
+                name="password" 
+                type="password" 
+                required 
+                class="w-full" 
+                placeholder="Enter your password">
+            <!-- Menampilkan error spesifik untuk field password -->
+            {% for error in form.password.errors %}
+                <p class="text-red-400 text-xs mt-1">{{ error }}</p>
+            {% endfor %}
+        </div>
+        
+        <div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Sign In
+            </button>
+        </div>
+    </form>
+
+    <!-- Menampilkan pesan dari Django Messages Framework (misal: "Berhasil register!") -->
+    {% if messages %}
+        <div class="mt-6 space-y-2">
+            {% for message in messages %}
+                <div class="bg-green-500 bg-opacity-20 text-green-300 text-center p-3 rounded-lg text-sm">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <p class="text-center text-gray-400 mt-6">
+        Don't have an account? <a href="{% url 'main:register' %}" class="text-blue-400 hover:underline font-semibold">Register Now</a>
+    </p>
 </div>
-
 {% endblock content %}
+

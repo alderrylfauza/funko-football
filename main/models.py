@@ -11,6 +11,6 @@ class Product(models.Model):
     stock = models.PositiveIntegerField(default=0) # contoh stok
     is_featured = models.BooleanField(default=False)  # produk unggulan
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    
+
     def __str__(self):
         return self.name

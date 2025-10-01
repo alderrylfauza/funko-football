@@ -1,22 +1,78 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}{{ product.name }} - Product Detail{% endblock %}
+{% block title %}{{ product.name }} - Marketplace{% endblock %}
 
 {% block content %}
-    <a href="{% url 'main:show_main' %}">Back to Main</a>
-    
-    <h1>{{ product.name }}</h1>
-    <p><strong>Price:</strong> Rp{{ product.price }}</p>
-    <p><strong>Description:</strong> {{ product.description }}</p>
-    <p><strong>Category:</strong> {{ product.category }}</p>
-    <p><strong>Stock:</strong> {{ product.stock }}</p>
-    <p><strong>Featured:</strong> {{ product.is_featured }}</p>
-    <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="200">
+    <!-- Back Navigation -->
+    <div class="mb-6">
+        <a href="{% url 'main:show_main' %}" class="text-gray-400 hover:text-white font-medium transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Back to Marketplace
+        </a>
+    </div>
 
-    {% if product.user %}
-        <p>Author: {{ product.user.username }}</p>
-    {% else %}
-        <p>Author: Anonymous</p>
-    {% endif %}
+    <!-- Main Product Article -->
+    <article class="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700">
+        
+        <!-- Header Section -->
+        <div class="p-6 sm:p-8">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">
+                    {{ product.category|title }}
+                </span>
+                {% if product.is_featured %}
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-500 text-white">
+                        Featured Item
+                    </span>
+                {% endif %}
+            </div>
+            
+            <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight mb-4">
+                {{ product.name }}
+            </h1>
 
+            <div class="flex flex-wrap items-center text-lg text-gray-300 gap-6">
+                <p class="text-3xl font-bold text-blue-400">Rp{{ product.price }}</p>
+                <span class="text-gray-500">|</span>
+                <p><strong>Stock:</strong> {{ product.stock }} available</p>
+            </div>
+        </div>
+
+        <!-- Main Content (Image & Description) -->
+        <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <!-- Image Column -->
+            {% if product.thumbnail %}
+                <div>
+                    <img src="{{ product.thumbnail }}" 
+                         alt="{{ product.name }}" 
+                         class="w-full h-auto object-cover rounded-lg shadow-lg">
+                </div>
+            {% endif %}
+
+            <!-- Description Column -->
+            <div class="prose prose-invert max-w-none">
+                <p class="text-gray-300 leading-relaxed whitespace-pre-line text-base">
+                    {{ product.description }}
+                </p>
+            </div>
+        </div>
+
+        <!-- Seller Info Footer -->
+        <div class="border-t border-gray-700 p-6 sm:p-8 bg-gray-900">
+            <div>
+                <p class="text-sm text-gray-500 mb-1">Sold by</p>
+                <div class="font-medium text-white">
+                    {% if product.user %}
+                        <p>{{ product.user.username }}</p>
+                    {% else %}
+                        <p>Anonymous</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </article>
 {% endblock content %}
+

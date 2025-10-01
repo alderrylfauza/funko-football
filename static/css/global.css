@@ -1,0 +1,19 @@
+/* Mengatur font default untuk seluruh situs */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Kustomisasi dasar untuk form agar sesuai dengan tema gelap */
+input, textarea {
+    background-color: #1F2937; /* bg-gray-800 */
+    border: 1px solid #4B5563; /* border-gray-600 */
+    color: #E5E7EB; /* text-gray-200 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 0.75rem 1rem;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #3B82F6; /* border-blue-500 */
+    box-shadow: 0 0 0 2px #1e40af; /* ring-blue-500 */
+}

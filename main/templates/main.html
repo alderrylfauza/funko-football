@@ -1,39 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
 {% block title %}{{ app_name }}{% endblock %}
 
 {% block content %}
-    <h1>{{ app_name }}</h1>
-    <p>Name: {{ username }}</p>
-    <p>Class: {{ class_name }}</p>
-    
-    <a href="{% url 'main:create_product' %}">Add New Product</a>
-    <a href="{% url 'main:logout' %}">
-        <button>Logout</button>
-    </a>
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-    <hr>
-    <a href="?filter=all">
-        <button type="button">All Articles</button>
-    </a>
-    <a href="?filter=my">
-        <button type="button">My Articles</button>
-    </a> 
+    <!-- Header Section -->
+    <div class="mb-8 text-center md:text-left">
+        <h1 class="text-4xl font-bold text-white tracking-tight">{{ app_name }}</h1>
+        <p class="text-gray-400 mt-2">The exclusive marketplace for player-owned lifestyle items.</p>
+    </div>
 
-    <h2>Available Products</h2>
-    <ul>
+    <!-- Filter Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 bg-gray-800 rounded-lg border border-gray-700 p-4">
+        <div class="flex space-x-3 mb-4 sm:mb-0">
+            <a href="?filter=all" class="{% if request.GET.filter == 'all' or not request.GET.filter %} bg-blue-600 text-white{% else %}bg-gray-700 text-gray-300 hover:bg-gray-600{% endif %} px-4 py-2 rounded-md font-medium transition-colors text-sm">
+                All Products
+            </a>
+            <a href="?filter=my" class="{% if request.GET.filter == 'my' %} bg-blue-600 text-white{% else %}bg-gray-700 text-gray-300 hover:bg-gray-600{% endif %} px-4 py-2 rounded-md font-medium transition-colors text-sm">
+                My Products
+            </a>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="text-sm text-gray-500">
+                Last login: {{ last_login }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {% for product in products %}
-            <li>
-                <h3>{{ product.name }}</h3>
-                <p><strong>Price:</strong> Rp{{ product.price }}</p>
-                <p><strong>Description:</strong> {{ product.description }}</p>
-                <p><strong>Category:</strong> {{ product.category }}</p>
-                <p><strong>Stock:</strong> {{ product.stock }}</p>
-                <p><strong>Featured:</strong> {{ product.is_featured }}</p>
-                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="150">
-                <br>
-                <a href="{% url 'main:show_product' product.id %}">Detail</a>
-            </li>
+            {% include 'card_product.html' with product=product %}
         {% empty %}
-            <li>No products available.</li>
+            <div class="col-span-full text-center py-20 bg-gray-800 rounded-lg">
+                <img src="{% static 'image/no-news.png' %}" alt="No Products Found" class="mx-auto h-32 w-32 opacity-75">
+                <h2 class="text-2xl font-semibold text-white mt-6">No Products Found</h2>
+                <p class="text-gray-400 mt-2">There are no products available yet. Why not add the first one?</p>
+                <a href="{% url 'create_product' %}" class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition duration-300">
+                    Add New Product
+                </a>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
+

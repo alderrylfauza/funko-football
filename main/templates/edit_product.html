@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Add New Product - Marketplace{% endblock %}
+{% block title %}Edit Product - Marketplace{% endblock %}
 
 {% block content %}
 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -19,8 +19,8 @@
     <!-- Form Card -->
     <div class="bg-gray-800 rounded-2xl border border-gray-700 p-6 sm:p-8 shadow-2xl">
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-white mb-2">Add a New Item</h1>
-        <p class="text-gray-400">Fill out the details for the lifestyle item you want to sell.</p>
+        <h1 class="text-3xl font-bold text-white mb-2">Edit Item</h1>
+        <p class="text-gray-400">Update the details for your lifestyle item.</p>
       </div>
       
       <form method="POST" class="space-y-6">
@@ -48,7 +48,7 @@
             Cancel
           </a>
           <button type="submit" class="order-1 sm:order-2 w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300">
-            Add Product
+            Update Product
           </button>
         </div>
       </form>

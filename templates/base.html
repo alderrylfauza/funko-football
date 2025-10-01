@@ -1,9 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>{% block title %}Football FunkoPop Shop{% endblock %}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>{% block title %}Athletes' Locker{% endblock %}</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
 </head>
-<body>
-    {% block content %}
-    {% endblock %}
+<body class="bg-gray-900 text-gray-200 font-sans">
+
+    <!-- Navbar akan dimasukkan di sini, kita akan desain nanti -->
+    {% include 'navbar.html' %}
+
+    <!-- Kontainer utama untuk konten halaman -->
+    <main class="container mx-auto p-4 md:p-6">
+        {% block content %}
+        <!-- Konten dari halaman lain akan dimuat di sini -->
+        {% endblock %}
+    </main>
+
 </body>
 </html>
+
