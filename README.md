@@ -120,3 +120,86 @@ grid memungkinkan kita untuk mengontrol baris dan kolom secara bersamaan. ini sa
 pertama, aku ambil halaman register.html dan login.html yang masih sederhana, lalu aku memikirkan tentang visi desain. kita sepakat untuk tema gelap yang modern, dan akhirnya rombak total kedua halaman itu menggunakan tailwind css. pastikan setiap input field, tombol, dan pesan error terlihat serasi dengan tema premium yang diinginkan, sesuatu yang tutorial lakukan di tahap akhir, tapi aku prioritaskan di awal untuk menetapkan nuansa aplikasi.
 aku mengimplementasikan fungsi edit_product dan delete_product di views.py dan urls.py. tapi, aku terjebak pada error reverse for 'show_product' not found. melalui serangkaian percakapan, aku belajar bersama tentang pentingnya app_name, perbedaan antara id dan pk, dan bagaimana semua bagian (template, url, dan view) harus sinkron. ini adalah pengalaman belajar yang jauh lebih mendalam daripada sekadar mengikuti instruksi.
 memutuskan untuk membuat rebranding total dari "toko funko pop" menjadi "marketplace lifestyle pemain bola" dengan tema gelap yang keren. pemilihan font "inter" dari google fonts, penggunaan warna aksen biru, hingga desain card yang minimalis
+
+TUGAS 6
+
+
+perbedaan antara synchronous dan asynchronous request
+perbedaan utamanya adalah cara browser menangani waktu tunggu.
+
+synchronous request (permintaan sinkron)
+ini adalah cara kerja web tradisional. saat anda mengklik link, browser mengirim permintaan, lalu berhenti total dan menunggu sampai server mengirim kembali seluruh halaman html yang baru. selama menunggu, halaman akan membeku. setelah respons diterima, seluruh halaman akan dimuat ulang.
+
+asynchronous request (permintaan asinkron)
+ini adalah cara kerja ajax. saat sebuah aksi terjadi, javascript mengirim permintaan ke server di latar belakang. pengguna bisa terus berinteraksi dengan halaman tanpa gangguan. saat server mengirimkan kembali data kecil (biasanya json), javascript akan memperbarui hanya bagian kecil dari halaman yang relevan tanpa perlu memuat ulang seluruhnya.
+
+
+bagaimana ajax bekerja di django (alur request–response)
+alur kerja ajax di django melibatkan komunikasi antara javascript di front-end dan sebuah view khusus di back-end.
+
+trigger (front-end): pengguna melakukan aksi (misalnya, klik tombol) yang memicu sebuah fungsi javascript.
+
+request (front-end): fungsi javascript (menggunakan fetch() api) mengirimkan request ke sebuah url spesifik di django, seringkali membawa data dari form.
+
+url routing (django): urls.py django menerima url tersebut dan mengarahkannya ke sebuah view function.
+
+view processing (django): view function di views.py menerima request, memproses data, dan berinteraksi dengan database.
+
+response (django): view tidak me-render seluruh template html. sebaliknya, view mengembalikan data dalam format ringan, paling umum menggunakan jsonresponse.
+
+dom manipulation (front-end): javascript menggunakan data dari json tersebut untuk memperbarui halaman html (dom) secara langsung, misalnya mengubah angka jumlah suka tanpa me-reload halaman.
+
+keuntungan menggunakan ajax dibandingkan render biasa
+pengalaman pengguna (ux) yang lebih baik: interaksi terasa lebih mulus dan cepat, mirip aplikasi desktop, karena tidak ada kedipan layar putih saat halaman dimuat ulang.
+
+mengurangi beban server & bandwidth: ajax hanya mengirim dan menerima data yang diperlukan, bukan seluruh file html. ini membuat transfer data lebih efisien.
+
+peningkatan performa: karena data yang ditransfer lebih kecil dan halaman tidak dimuat ulang sepenuhnya, website terasa jauh lebih cepat.
+
+perbedaan antara synchronous dan asynchronous request
+perbedaan utamanya adalah cara browser menangani waktu tunggu.
+
+synchronous request (permintaan sinkron)
+ini adalah cara kerja web tradisional. saat anda mengklik link, browser mengirim permintaan, lalu berhenti total dan menunggu sampai server mengirim kembali seluruh halaman html yang baru. selama menunggu, halaman akan membeku. setelah respons diterima, seluruh halaman akan dimuat ulang.
+
+asynchronous request (permintaan asinkron)
+ini adalah cara kerja ajax. saat sebuah aksi terjadi, javascript mengirim permintaan ke server di latar belakang. pengguna bisa terus berinteraksi dengan halaman tanpa gangguan. saat server mengirimkan kembali data kecil (biasanya json), javascript akan memperbarui hanya bagian kecil dari halaman yang relevan tanpa perlu memuat ulang seluruhnya.
+
+
+bagaimana ajax bekerja di django (alur request–response)
+alur kerja ajax di django melibatkan komunikasi antara javascript di front-end dan sebuah view khusus di back-end.
+
+trigger (front-end): pengguna melakukan aksi (misalnya, klik tombol) yang memicu sebuah fungsi javascript.
+
+request (front-end): fungsi javascript (menggunakan fetch() api) mengirimkan request ke sebuah url spesifik di django, seringkali membawa data dari form.
+
+url routing (django): urls.py django menerima url tersebut dan mengarahkannya ke sebuah view function.
+
+view processing (django): view function di views.py menerima request, memproses data, dan berinteraksi dengan database.
+
+response (django): view tidak me-render seluruh template html. sebaliknya, view mengembalikan data dalam format ringan, paling umum menggunakan jsonresponse.
+
+dom manipulation (front-end): javascript menggunakan data dari json tersebut untuk memperbarui halaman html (dom) secara langsung, misalnya mengubah angka jumlah suka tanpa me-reload halaman.
+
+
+keuntungan menggunakan ajax dibandingkan render biasa
+pengalaman pengguna (ux) yang lebih baik: interaksi terasa lebih mulus dan cepat, mirip aplikasi desktop, karena tidak ada kedipan layar putih saat halaman dimuat ulang.
+
+mengurangi beban server & bandwidth: ajax hanya mengirim dan menerima data yang diperlukan, bukan seluruh file html. ini membuat transfer data lebih efisien.
+
+peningkatan performa: karena data yang ditransfer lebih kecil dan halaman tidak dimuat ulang sepenuhnya, website terasa jauh lebih cepat.
+
+interaksi yang kompleks: memungkinkan pembuatan fitur dinamis seperti infinite scroll, live search, atau validasi form secara real-time.
+
+
+keamanan ajax untuk fitur login dan register
+menggunakan ajax tidak mengurangi keamanan. semua fitur keamanan standar django tetap harus diterapkan.
+
+csrf protection: semua request post melalui ajax harus menyertakan csrf token. javascript harus membaca token ini dari halaman dan mengirimkannya dalam request header.
+
+gunakan decorators django: lindungi view ajax anda sama seperti view biasa. gunakan @login_required untuk memastikan hanya pengguna yang sudah login yang bisa mengaksesnya.
+
+validasi di sisi server: jangan pernah percaya data yang dikirim dari front-end. selalu validasi semua input menggunakan django forms untuk melindungi dari serangan seperti sql injection.
+
+pengaruh ajax pada pengalaman pengguna (user experience)
+pengguna mendapatkan respons langsung atas tindakan mereka. contoh: pesan "username sudah terpakai" bisa muncul seketika tanpa harus mengirim form dan menunggu halaman dimuat ulang.
